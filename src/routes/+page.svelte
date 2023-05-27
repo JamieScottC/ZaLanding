@@ -1,92 +1,28 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import dayjs from "dayjs";
-
-  type link = {
-    name: String;
-    link: string;
-  }
-
-  interface category {
-    title: String;
-    children: Array<link>;
-    color: String;
-  }
+  import { categories } from "../landing.config";
 
   let searchTerm = "";
   let day = "";
-  let categories: Array<category> = [
-    {
-      title: "socials",
-      color: "green",
-      children: [
-        {
-          name: "twitter",
-          link: "https://twitter.com"
-        },
-        {
-          name: "reddit",
-          link: "reddit.com"
-        }
-      ]
-    },
-    {
-      title: "tools",
-      color: "teal",
-      children: [
-        {
-          name: "github",
-          link: "github.com"
-        }
-      ]
-    },
-    {
-      title: "leisure",
-      color: "blue",
-      children: [
-        {
-          name: "youtube",
-          link: "youtube.com"
-        },
-        {
-          name: "twitch",
-          link: "twitch.tv"
-        }
-      ]
-    },
-    {
-      title: "dev",
-      color: "purple",
-      children: [
-        {
-          name: "repo",
-          link: "repo.new"
-        },
-        {
-          name: "typewolf",
-          link: "typewolf.com"
-        }
-      ]
-    },
-    {
-      title: "other",
-      color: "rose",
-      children: [
-        {
-          name: "monkeytype",
-          link: "monkeytype.com"
-        },
-        {
-          name: "front end masters",
-          link: "frontendmasters.com"
-        }
-      ]
-    },
-  ];
+  let time = "";
+  let timeIntervalId: number;  
 
   onMount(() => {
     day = dayjs().format("dddd");
+    setTime();
+    timeIntervalId = setInterval(() => {
+      time = dayjs().format("hh:mm:ss");
+    }, 1000)
   });
+
+  onDestroy(() => {
+    clearInterval(timeIntervalId);
+  });
+
+  const setTime = () => {
+    time = dayjs().format("hh:mm:ss");
+  }
 
   const search = (e: any) => {
     const searchData = new FormData(e.target);
@@ -148,8 +84,12 @@
         <div
           class="w-full h-[20%] flex gap-3 bg-blue-200/10 relative p-3 backdrop-blur-[2px]"
         >
-          <div class="w-full" >
-        <form on:submit|preventDefault={search}>
+
+            <h2
+              class="text-blue-200/60 select-none absolute -top-[5.2rem] left-0 font-cursive text-[6.5rem] m-0 leading-tight">{time}
+            </h2>
+        <div class="w-full flex items-center">
+        <form on:submit|preventDefault={search} class="w-full">
           <input
             type="text"
             name="query"
