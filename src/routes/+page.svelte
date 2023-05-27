@@ -1,88 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import dayjs from "dayjs";
-
-  type link = {
-    name: String;
-    link: string;
-  }
-
-  interface category {
-    title: String;
-    children: Array<link>;
-    color: String;
-  }
+  import { categories } from "../landing.config";
 
   let searchTerm = "";
   let day = "";
-  let categories: Array<category> = [
-    {
-      title: "socials",
-      color: "green",
-      children: [
-        {
-          name: "twitter",
-          link: "https://twitter.com"
-        },
-        {
-          name: "reddit",
-          link: "reddit.com"
-        }
-      ]
-    },
-    {
-      title: "tools",
-      color: "teal",
-      children: [
-        {
-          name: "github",
-          link: "github.com"
-        }
-      ]
-    },
-    {
-      title: "leisure",
-      color: "blue",
-      children: [
-        {
-          name: "youtube",
-          link: "youtube.com"
-        },
-        {
-          name: "twitch",
-          link: "twitch.tv"
-        }
-      ]
-    },
-    {
-      title: "dev",
-      color: "purple",
-      children: [
-        {
-          name: "repo",
-          link: "repo.new"
-        },
-        {
-          name: "typewolf",
-          link: "typewolf.com"
-        }
-      ]
-    },
-    {
-      title: "other",
-      color: "rose",
-      children: [
-        {
-          name: "monkeytype",
-          link: "monkeytype.com"
-        },
-        {
-          name: "front end masters",
-          link: "frontendmasters.com"
-        }
-      ]
-    },
-  ];
 
   onMount(() => {
     day = dayjs().format("dddd");
