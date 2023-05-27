@@ -70,8 +70,8 @@
         <div
           class="w-full h-[20%] flex gap-3 bg-blue-200/10 relative p-3 backdrop-blur-[2px]"
         >
-          <div class="w-full" >
-        <form on:submit|preventDefault={search}>
+        <div class="w-full bg-red-100 flex items-center">
+        <form on:submit|preventDefault={search} class="w-full">
           <input
             type="text"
             name="query"

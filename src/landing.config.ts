@@ -74,6 +74,10 @@ export const categories: Array<category> = [
         name: "front end masters",
         link: "https://frontendmasters.com",
       },
+      {
+        name: "localhost:5173",
+        link: "http://localhost:5173",
+      },
     ],
   },
 ];
