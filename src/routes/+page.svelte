@@ -1,14 +1,28 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import dayjs from "dayjs";
   import { categories } from "../landing.config";
 
   let searchTerm = "";
   let day = "";
+  let time = "";
+  let timeIntervalId: number;  
 
   onMount(() => {
     day = dayjs().format("dddd");
+    setTime();
+    timeIntervalId = setInterval(() => {
+      time = dayjs().format("hh:mm:ss");
+    }, 1000)
   });
+
+  onDestroy(() => {
+    clearInterval(timeIntervalId);
+  });
+
+  const setTime = () => {
+    time = dayjs().format("hh:mm:ss");
+  }
 
   const search = (e: any) => {
     const searchData = new FormData(e.target);
@@ -70,7 +84,11 @@
         <div
           class="w-full h-[20%] flex gap-3 bg-blue-200/10 relative p-3 backdrop-blur-[2px]"
         >
-        <div class="w-full bg-red-100 flex items-center">
+
+            <h2
+              class="text-blue-200/60 select-none absolute -top-[5.2rem] left-0 font-cursive text-[6.5rem] m-0 leading-tight">{time}
+            </h2>
+        <div class="w-full flex items-center">
         <form on:submit|preventDefault={search} class="w-full">
           <input
             type="text"

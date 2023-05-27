@@ -2,7 +2,6 @@ type link = {
   name: String;
   link: string;
 };
-
 interface category {
   title: String;
   children: Array<link>;
@@ -31,6 +30,10 @@ export const categories: Array<category> = [
       {
         name: "github",
         link: "https://github.com",
+      },
+      {
+        name: "vercel",
+        link: "https://vercel.com",
       },
     ],
   },
