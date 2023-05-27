@@ -35,6 +35,14 @@ export const categories: Array<category> = [
         name: "vercel",
         link: "https://vercel.com",
       },
+      {
+        name: "todoist",
+        link: "https://todoist.com",
+      },
+      {
+        name: "google calendar",
+        link: "https://calendar.google.com/calendar/u/0/r",
+      },
     ],
   },
   {
