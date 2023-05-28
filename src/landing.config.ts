@@ -1,14 +1,14 @@
-type link = {
+export type Link = {
   name: String;
   link: string;
 };
-interface category {
+export interface Category {
   title: String;
-  children: Array<link>;
+  children: Array<Link>;
   color: String;
 }
 
-export const categories: Array<category> = [
+export const defaultCategories: Array<Category> = [
   {
     title: "socials",
     color: "green",
