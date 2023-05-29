@@ -7,22 +7,22 @@ export default {
         sans: ["Satoshi", "sans-serif"],
         cursive: ["Smooch", "cursive"],
       },
-      animation: {
-        wavy: "wavy 30s ease-in-out infinite",
-      },
-      keyframes: {
-        wavy: {
-          "0%": {
-            transform: "translateX(0px)",
-          },
-          "50%": {
-            transform: "translateX(100px)",
-          },
-          "100%": {
-            transform: "translateX(0px)",
-          },
-        },
-      },
+      // animation: {
+      //   wavy: "wavy 30s ease-in-out infinite",
+      // },
+      // keyframes: {
+      //   wavy: {
+      //     "0%": {
+      //       transform: "translateX(0px)",
+      //     },
+      //     "50%": {
+      //       transform: "translateX(100px)",
+      //     },
+      //     "100%": {
+      //       transform: "translateX(0px)",
+      //     },
+      //   },
+      // },
     },
   },
   safelist: [
