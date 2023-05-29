@@ -66,6 +66,8 @@
     categories = JSON.parse(
       window.localStorage.getItem("categories")!
     ) as Array<Category>;
+
+    showModal = false;
   }
 
   const removeLink = (categoryIndex: number, linkIndex: number) => {
@@ -139,7 +141,10 @@
       placeholder:text-blue-100/80 z-50"
       value={custonLinkName}
     />
-    <button type="submit"> add link </button>
+    <div class="flex flex-row">
+      <button type="submit" class="mr-1"> add link </button>
+      <button type="button" class="ml-1" on:click={() => showModal = false}> close </button>
+    </div>
   </form>
 </Modal>
 
@@ -201,7 +206,7 @@
               </div>
             {/each}
             {#if isEditMode}
-              <button class="text-white w-3 h-3 ml-1" on:click={() => {
+              <button class="text-white w-3 h-3" on:click={() => {
                 showModal = true
               }}>
                 <FaPlus />
