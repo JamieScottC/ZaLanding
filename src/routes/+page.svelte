@@ -27,12 +27,14 @@
     categories = JSON.parse(
       window.localStorage.getItem("categories")!
     ) as Array<Category>;
-  });
 
     time = dayjs().format("hh:mm:ss");
     timeIntervalId = setInterval(() => {
       time = dayjs().format("hh:mm:ss");
-    }, 1000)
+    }, 1000);
+
+  });
+
 
   onDestroy(() => {
     clearInterval(timeIntervalId);
