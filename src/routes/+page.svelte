@@ -9,8 +9,8 @@
   import FaTrash from 'svelte-icons/fa/FaTrash.svelte'
 
   let searchTerm = "";
-  let day = "";
-  let time = "";
+  export let data;
+  let time = dayjs().format("hh:mm:ss");
   let timeIntervalId: number;  
   let categories: Array<Category> = [];
   let isEditMode = false;
@@ -27,21 +27,11 @@
     categories = JSON.parse(
       window.localStorage.getItem("categories")!
     ) as Array<Category>;
-
-    day = dayjs().format("dddd");
-    setTime();
-    timeIntervalId = setInterval(() => {
-      time = dayjs().format("hh:mm:ss");
-    }, 1000)
   });
 
   onDestroy(() => {
     clearInterval(timeIntervalId);
   });
-
-  const setTime = () => {
-    time = dayjs().format("hh:mm:ss");
-  }
 
   const search = (e: any) => {
     const searchData = new FormData(e.target);
@@ -77,6 +67,12 @@
     categories = JSON.parse(
       window.localStorage.getItem("categories")!
     ) as Array<Category>;
+  }
+
+  if (typeof window !== "undefined"){
+    timeIntervalId = setInterval(() => {
+      time = dayjs().format("hh:mm:ss");
+    }, 1000)
   }
 
 </script>
@@ -181,7 +177,7 @@
       </div>
       <div class="flex justify-end h-full w-0">
         <h2
-          class="text-blue-200/60 select-none absolute -top-[5.2rem] right-0 font-cursive text-[6.5rem] m-0 leading-tight">{day}</h2>
+          class="text-blue-200/60 select-none absolute -top-[5.2rem] right-0 font-cursive text-[6.5rem] m-0 leading-tight">{data.day}</h2>
       </div>
     </div>
     <div
