@@ -10,7 +10,7 @@
 
   let searchTerm = "";
   export let data;
-  let time = dayjs().format("hh:mm:ss");
+  let time = "";
   let timeIntervalId: number;  
   let categories: Array<Category> = [];
   let isEditMode = false;
@@ -28,6 +28,11 @@
       window.localStorage.getItem("categories")!
     ) as Array<Category>;
   });
+
+    time = dayjs().format("hh:mm:ss");
+    timeIntervalId = setInterval(() => {
+      time = dayjs().format("hh:mm:ss");
+    }, 1000)
 
   onDestroy(() => {
     clearInterval(timeIntervalId);
@@ -67,12 +72,6 @@
     categories = JSON.parse(
       window.localStorage.getItem("categories")!
     ) as Array<Category>;
-  }
-
-  if (typeof window !== "undefined"){
-    timeIntervalId = setInterval(() => {
-      time = dayjs().format("hh:mm:ss");
-    }, 1000)
   }
 
 </script>
@@ -172,6 +171,7 @@
             class="min-w-full h-full leading-none align-baseline bg-transparent p-0 text-blue-100 text-base outline-none border-b border-blue-200/50 
             placeholder:text-blue-100/80 z-50"
             value={searchTerm}
+            autofocus
           />
         </form>
       </div>
