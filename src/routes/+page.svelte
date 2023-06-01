@@ -18,6 +18,7 @@
   let customLink = "";
   let custonLinkName = "";
   let selectedCategoryIndex = 0;
+  let isAnimate = true;
 
   onMount(() => {
     if (!window.localStorage.getItem("categories")) {
@@ -32,6 +33,10 @@
     timeIntervalId = setInterval(() => {
       time = dayjs().format("hh:mm:ss");
     }, 1000);
+
+    if (window.localStorage.getItem("isAnimate")) {
+      isAnimate = window.localStorage.getItem("isAnimate") === "true";
+    }
 
   });
 
@@ -83,7 +88,7 @@
   width="500vw"
   height="500vh"
   xmlns="http://www.w3.org/2000/svg"
-  class="absolute bottom-0 z-[-1000] animate-wavy"
+  class={"absolute bottom-0 z-[-1000] " + (isAnimate ? "animate-wavy": "")}
 >
   <defs>
     <pattern
@@ -119,7 +124,16 @@
 <button class="absolute left-2 top-2 text-white w-8 h-8" on:click={() => isEditMode = !isEditMode}>
   <FaEdit />
 </button>
-
+{#if isEditMode} 
+  <div class="absolute left-2 top-10 text-white flex flex-col">
+    <div class="flex flex-row justify-center">
+      <label for="edit_animate">Enable Animation</label>
+      <input class="ml-2 " name="edit_animate" type="checkbox" bind:checked={isAnimate} on:change={() => {
+        window.localStorage.setItem("isAnimate", isAnimate.toString());
+      }}/>
+    </div>
+  </div>
+{/if}
 <Modal bind:showModal>
   <form on:submit|preventDefault={addCustomLink} class="w-full">
     <input
